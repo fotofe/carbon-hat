@@ -1,0 +1,48 @@
+name: Build installer ISO
+
+on:
+  workflow_dispatch:        # "Run workflow" button on GitHub
+
+permissions:
+  contents: read
+
+env:
+  IMAGE: ghcr.io/${{ github.repository_owner }}/carbon-hat:latest
+
+jobs:
+  iso:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - name: Make room on the runner
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache \
+            /usr/share/swift /usr/local/share/boost /usr/local/share/powershell
+          df -h /
+
+      - uses: actions/checkout@v4
+
+      - name: Build ISO
+        run: |
+          mkdir -p output
+          sudo podman pull "$IMAGE"
+          sudo podman run --rm --privileged --pull=newer \
+            --security-opt label=type:unconfined_t \
+            -v ./iso/config.toml:/config.toml:ro \
+            -v ./output:/output \
+            -v /var/lib/containers/storage:/var/lib/containers/storage \
+            quay.io/centos-bootc/bootc-image-builder:latest \
+            --type anaconda-iso --rootfs btrfs --use-librepo=True \
+            "$IMAGE"
+          name="carbon-hat-$(cat VERSION)-$(date -u +%Y%m%d).iso"
+          sudo mv output/bootiso/install.iso "$name"
+          sudo chown "$USER" "$name"
+          sha256sum "$name" > "$name.sha256"
+          ls -lh "$name"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: carbon-hat-iso
+          path: carbon-hat-*.iso*
+          compression-level: 0
+          retention-days: 14

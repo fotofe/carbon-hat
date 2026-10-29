@@ -5,8 +5,8 @@ Progress tracker for Carbon hat. ✅ done · 🔨 in progress · ⬜ not started
 
 | # | Phase | Status | Estimate |
 |---|-------|--------|----------|
-| 0 | Build pipeline, base image, codecs, memory tuning, textures, colours, wallpapers, file.txt | ✅ (waiting for first GitHub build) | 1 session |
-| 1 | Installer ISO + first test on a USB stick / spare PC | ⬜ | 1–2 sessions |
+| 0 | Build pipeline, base image, codecs, memory tuning, textures, colours, wallpapers, file.txt | ✅ | 1 session |
+| 1 | Installer ISO + first test on a USB stick / spare PC | 🔨 (ISO workflow added; not yet tested) | 1–2 sessions |
 | 2 | Look: textured panels and menus, app style, window borders, GTK colours, login screen, boot logo | ⬜ | 2–3 sessions |
 | 3 | Shell: bottom white bar + hover dock, top bar (only in apps), home screen clock + widgets, Right Alt overview | ⬜ | 3–4 sessions |
 | 4 | Cogs: Super ×1/×2/×3, Ctrl+Super, categories (auto-detect, merge, custom) | ⬜ | 2–3 sessions |

@@ -3,7 +3,7 @@ name: Build Carbon hat
 on:
   push:
     branches: [main]
-    paths-ignore: ["**.md", "art/**"]
+    paths-ignore: ["**.md", "art/**", "iso/**", ".github/workflows/build-iso.yml"]
   schedule:
     - cron: "20 5 * * *"   # every day, to pick up Fedora updates
   workflow_dispatch:        # "Run workflow" button on GitHub

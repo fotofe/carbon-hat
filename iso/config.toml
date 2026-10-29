@@ -1,0 +1,10 @@
+# Settings for the installer ISO (see .github/workflows/build-iso.yml).
+#
+# The installer copies the image that is packed inside the ISO. Afterwards,
+# point the system at GitHub so it gets updates from there.
+[customizations.installer.kickstart]
+contents = """
+%post --erroronfail
+bootc switch --mutate-in-place --transport registry ghcr.io/fotofe/carbon-hat:latest
+%end
+"""
