@@ -1,0 +1,14 @@
+{
+    "KPackageStructure": "Plasma/LookAndFeel",
+    "KPlugin": {
+        "Authors": [{ "Name": "fotofe" }],
+        "Category": "",
+        "Description": "Linen surfaces",
+        "Id": "org.carbonhat.light",
+        "License": "GPL-2.0-or-later",
+        "Name": "Carbon hat Light",
+        "Version": "0.1",
+        "Website": "https://github.com/fotofe/carbon-hat"
+    },
+    "X-Plasma-APIVersion": "2"
+}

@@ -1,0 +1,13 @@
+#!/usr/bin/bash
+# First boot: install the Flatpak apps every Carbon hat PC gets.
+# Apps the user picks in setup are installed by the setup app instead.
+set -eu
+
+flatpak remote-add --system --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+apps=$(grep -hv '^\s*\(#\|$\)' /usr/share/carbonhat/flatpaks/*.list)
+# shellcheck disable=SC2086
+flatpak install --system --noninteractive --or-update flathub $apps
+
+mkdir -p /var/lib/carbonhat
+touch /var/lib/carbonhat/flatpaks-done

@@ -1,0 +1,10 @@
+[Unit]
+Description=Carbon hat: tune memory for this PC's RAM size
+After=systemd-sysctl.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/carbonhat/tune-memory
+
+[Install]
+WantedBy=multi-user.target

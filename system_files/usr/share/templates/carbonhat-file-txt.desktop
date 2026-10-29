@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Text file (file.txt)
+Comment=Name of the new text file:
+Type=Link
+URL=.source/file.txt
+Icon=text-plain

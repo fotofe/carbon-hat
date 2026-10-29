@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+# Pick memory settings for this PC's RAM size. Runs once per boot.
+set -eu
+
+ram_mb=$(awk '/^MemTotal:/ {print int($2 / 1024)}' /proc/meminfo)
+if [ "$ram_mb" -le 12288 ]; then
+    swappiness=180   # small RAM: move idle pages into zram early
+else
+    swappiness=100   # big RAM: keep more in plain memory
+fi
+sysctl -q -w vm.swappiness="$swappiness"
+echo "RAM ${ram_mb} MB -> vm.swappiness=${swappiness}"

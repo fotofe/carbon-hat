@@ -1,0 +1,15 @@
+[Unit]
+Description=Carbon hat: install the default apps (first boot)
+Wants=network-online.target
+After=network-online.target
+ConditionPathExists=!/var/lib/carbonhat/flatpaks-done
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/carbonhat/install-flatpaks
+# No internet yet? Try again every 2 minutes.
+Restart=on-failure
+RestartSec=120
+
+[Install]
+WantedBy=multi-user.target
